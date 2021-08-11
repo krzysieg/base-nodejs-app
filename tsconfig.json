@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "outDir": "dist",
+        "rootDir": "src",
+        "allowJs": true,
+        "lib": [
+            "es5",
+            "es2015",
+            "es2016",
+            "es2017",
+            "dom",
+            "esnext"
+        ],
+        "allowSyntheticDefaultImports": true,
+        "noUnusedLocals": true,
+        "skipLibCheck": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true
+    },
+    "exclude": [
+        "node_modules",
+        "dist",
+        "static"
+    ]
+}

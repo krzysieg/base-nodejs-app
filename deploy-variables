@@ -1,0 +1,4 @@
+NETWORK_NAME="network"
+
+IMAGE_NAME="server:latest"
+CONTAINER_NAME="server"

@@ -1,0 +1,56 @@
+version: '2.1'
+
+services:
+  proxy:
+    build:
+      context: ../base-proxy-app
+      dockerfile: env-dev.Dockerfile
+    networks:
+      - network
+    ports:
+      - '3003:80'
+    depends_on:
+      - server
+      - client
+
+  client:
+    build:
+      context: ../base-vuejs-app
+      dockerfile: env-dev.Dockerfile
+    networks:
+      - network
+    volumes:
+      - ../base-vuejs-app:/app
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: .
+      dockerfile: env-dev.Dockerfile
+    networks:
+      - network
+    volumes:
+      - .:/app
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: postgres:13.1
+    networks:
+      - network
+    env_file: docker-compose.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - '5400:5432'
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "$POSTGRES_USER", "-d", "$POSTGRES_DB"]
+      interval: 1s
+
+volumes:
+  pgdata:
+
+networks:
+  network:
