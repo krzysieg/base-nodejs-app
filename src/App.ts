@@ -36,7 +36,7 @@ export default class App {
         const router: express.Router = express.Router();
         const controller = new BaseController();
 
-        router.get('/', controller.getData);
+        router.get('/', controller.getData());
 
         this.app.use('', router);
     }
